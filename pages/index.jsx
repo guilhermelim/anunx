@@ -4,6 +4,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Link from '../src/utility/Link';
 
+import SelectColorMode from '../src/components/theme/SelectColorMode'
+
+
 export default function Index() {
   return (
     <Container maxWidth="sm">
@@ -11,6 +14,7 @@ export default function Index() {
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js example
         </Typography>
+        <SelectColorMode />
         <Link href="/about">
           Go to the about page
         </Link>

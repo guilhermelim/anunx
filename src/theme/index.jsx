@@ -1,28 +1,19 @@
-import { createTheme, css } from '@mui/material/styles'
+import { css } from '@emotion/react'
+import { createTheme } from '@mui/material/styles'
 
-export const globalStyles = css`
-  :root {
-    body {
-      background-color: #ffffff;
-      color: #121212;
-    }
-  }
-  [data-theme="dark"] {
-    body {
-      background-color: #121212;
-      color: #ffffff;
-    }
-  }
-`
 
 export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#9147FF',
+      main: '#3f51b5',
     },
     secondary: {
-      main: '#2a48f3',
+      main: '#f50057',
+    },
+    background: {
+      default: '#fafafa',
+      paper: '#fff',
     },
   },
 })
@@ -31,10 +22,28 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#9147FF',
+      main: '#3f51b5',
     },
     secondary: {
-      main: '#2a48f3',
+      main: '#f50057',
+    },
+    background: {
+      default: '#303030',
+      paper: '#424242',
     },
   },
 })
+
+export const globalStyles = css`
+html,
+body {
+  color: ${lightTheme.palette.text.primary};
+  background: ${lightTheme.palette.background.default};
+}
+
+[data-theme='dark'],
+[data-theme='dark'] body {
+  color: ${darkTheme.palette.text.primary};
+  background: ${darkTheme.palette.background.default};
+}
+`

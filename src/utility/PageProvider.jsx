@@ -6,6 +6,8 @@ import { lightTheme, darkTheme } from '../theme'
 
 
 const PageProvider = ({ children }) => {
+    console.log(lightTheme.palette.background.default)
+
     const { resolvedTheme } = useTheme();
     const [currentTheme, setCurrentTheme] = useState(darkTheme);
     useEffect(() => {
