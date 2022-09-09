@@ -34,16 +34,18 @@ export const darkTheme = createTheme({
   },
 })
 
+const transitionEffect = `color 350ms ease 0s, background 350ms ease 0s`
 export const globalStyles = css`
 html,
 body {
   color: ${lightTheme.palette.text.primary};
   background: ${lightTheme.palette.background.default};
+  transition: ${transitionEffect};
 }
 
 [data-theme='dark'],
 [data-theme='dark'] body {
   color: ${darkTheme.palette.text.primary};
-  background: ${darkTheme.palette.background.default};
+  background: ${darkTheme.palette.background.default};  
 }
 `
