@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import useSound from 'use-sound'
-import { Select, MenuItem } from "@mui/material"
+import { Select, MenuItem } from '@mui/material'
 
 
 const SelectColorMode = () => {
