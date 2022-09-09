@@ -34,7 +34,7 @@ export const darkTheme = createTheme({
   },
 })
 
-const transitionEffect = `color 350ms ease 0s, background 350ms ease 0s`
+const transitionEffect = `color 350ms ease 0s, background 1000ms ease 0s`
 export const globalStyles = css`
 html,
 body {
