@@ -6,15 +6,16 @@ import { lightTheme, darkTheme } from '../theme'
 
 
 const PageProvider = ({ children }) => {
-    const { resolvedTheme } = useTheme();
-    const [currentTheme, setCurrentTheme] = useState(darkTheme);
+    const { resolvedTheme } = useTheme()
+    const [currentTheme, setCurrentTheme] = useState(darkTheme)
+
     useEffect(() => {
         resolvedTheme === "light"
             ? setCurrentTheme(lightTheme)
-            : setCurrentTheme(darkTheme);
-    }, [resolvedTheme]);
+            : setCurrentTheme(darkTheme)
+    }, [resolvedTheme])
 
     return <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>
 }
 
-export default PageProvider;
+export default PageProvider
