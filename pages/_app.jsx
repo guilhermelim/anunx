@@ -21,6 +21,7 @@ export default function MyApp(props) {
     <PreferredThemeProvider>
       <CacheProvider value={emotionCache}>
         <Head>
+          <title>Anunx</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <PageProvider>
