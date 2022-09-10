@@ -8,6 +8,7 @@ import { ThemeProvider as PreferredThemeProvider } from 'next-themes'
 import { GlobalStyles } from '@mui/material'
 
 import PageProvider from '../src/utility/PageProvider'
+import PageCheckMounted from '../src/utility/PageCheckMounted'
 import { globalStyles } from '../src/theme'
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -20,13 +21,16 @@ export default function MyApp(props) {
     <PreferredThemeProvider>
       <CacheProvider value={emotionCache}>
         <Head>
+          <title>Anunx</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <PageProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <GlobalStyles styles={globalStyles} />
-          <Component {...pageProps} />
+          <PageCheckMounted>
+            <Component {...pageProps} />
+          </PageCheckMounted>
         </PageProvider>
       </CacheProvider>
     </PreferredThemeProvider>
