@@ -1,63 +1,81 @@
-import { Container, Box, Typography, Button } from '@mui/material';
-import { textTransform } from '@mui/system';
+import { Container, Box, Stack, Typography, Button, Card, CardMedia, CardContent, CardActions } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2' // Grid version 2
-
-// import Link from '../src/utility/Link';
 
 import TemplateDefault from '../../src/templates/Default'
 
+const cards = [1, 2, 3, 4, 5, 6];
+
 export default function Index() {
 
-    return (
-        <TemplateDefault TemplateDefault >
-            <Container
-                className='add-ads'
-                maxWidth="md"
-                sx={{ pt: 8, pb: 8 }}
-            >
-                <Grid container spacing={2} display="flex" direction="column" justifyContent="center" alignItems="center">
-                    <Typography component="h1" variant="h2" align='center' gutterBottom >
-                        Meus Anúncios
-                    </Typography>
+  return (
+    <TemplateDefault TemplateDefault >
 
-                    <Button variant='contained' sx={{ textTransform: 'uppercase' }}>Publicar novo anúncio</Button>
-                </Grid>
-            </Container>
+      <Box
+        sx={{
+          // bgcolor: 'background.paper',
+          pt: 8,
+          pb: 6,
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            Meus Anúncios
+          </Typography>
+          <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            Você pode anunciar os seus produtos aqui!
+          </Typography>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+          >
+            <Button variant="contained" sx={{ textTransform: 'uppercase' }}>Publicar novo anúncio</Button>
+          </Stack>
+        </Container>
 
-            <Container
-                className='list-ads'
-                maxWidth="md"
-                sx={{ pb: 8 }}
-            >
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                    spacing={2}
-                    rowSpacing={1}
-                    columnSpacing={{ xs: 4, sm: 8, md: 12 }}
-                >
-                    <Grid xs={2} sm={4} md={4}>
-                        1
-                    </Grid>
-                    <Grid xs={2} sm={4} md={4}>
-                        2
-                    </Grid>
-                    <Grid item xs={2} sm={4} md={4}>
-                        3
-                    </Grid>
-                    <Grid xs={2} sm={4} md={4}>
-                        4
-                    </Grid>
-                    <Grid xs={2} sm={4} md={4}>
-                        5
-                    </Grid>
-                    <Grid xs={2} sm={4} md={4}>
-                        6
-                    </Grid>
-                </Grid>
-            </Container>
-        </TemplateDefault >
-    )
+
+      </Box>
+
+      <Container sx={{ py: 8 }} maxWidth="md">
+        {/* End hero unit */}
+        <Grid container spacing={4}>
+          {cards.map((card) => (
+            <Grid item key={card} xs={12} sm={6} md={4}>
+              <Card
+                sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+              >
+                <CardMedia
+                  component="img"
+                  height='151'
+                  // sx={{ // 16:9 pt: '56.25%',}}
+                  image='https://source.unsplash.com/1600x900/?products'
+                  alt='random'
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Produto X
+                  </Typography>
+                  <Typography>
+                    R$ 60,00
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Editar</Button>
+                  <Button size="small">Remover</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
+    </TemplateDefault >
+  )
 }
