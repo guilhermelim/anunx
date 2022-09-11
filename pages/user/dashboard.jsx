@@ -1,12 +1,11 @@
-import { Container, Box, Stack, Typography, Button, Card, CardMedia, CardContent, CardActions } from '@mui/material';
+import { Container, Box, Stack, Typography, Button, Card, CardMedia, CardContent, CardActions } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2' // Grid version 2
 
 import TemplateDefault from '../../src/templates/Default'
 
-const cards = [1, 2, 3, 4, 5, 6];
 
-export default function Index() {
-
+const cards = [1, 2, 3, 4, 5, 6]
+const Dashboard = () => {
   return (
     <TemplateDefault TemplateDefault >
 
@@ -79,3 +78,5 @@ export default function Index() {
     </TemplateDefault >
   )
 }
+
+export default Dashboard
