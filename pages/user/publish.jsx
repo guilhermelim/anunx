@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Container,
   Box,
   Paper,
   Stack,
   Typography,
-  Button, Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  CardActionArea,
+  Button,
   TextField,
   Select,
   MenuItem,
-  IconButton
 } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2' // Grid version 2
-
 import TemplateDefault from '../../src/templates/Default'
-import { DeleteForever } from '@mui/icons-material'
-import { red } from '@mui/material/colors'
 
-const cards = [1, 2, 3, 4, 5, 6]
+import Dropzone from '../../src/components/Dropzone'
+
+
 const Publish = () => {
   const [category, setCategory] = useState('')
 
@@ -32,13 +25,7 @@ const Publish = () => {
   return (
     <TemplateDefault TemplateDefault >
 
-      <Box
-        sx={{
-          // bgcolor: 'background.paper',
-          pt: 8,
-          pb: 0,
-        }}
-      >
+      <Box sx={{ pt: 8, pb: 0, }}>
         <Container maxWidth="sm">
           <Typography
             component="h1"
@@ -56,7 +43,7 @@ const Publish = () => {
       </Box>
 
       <Container maxWidth="md">
-        <Paper variant="outlined" spac sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
           <Stack
             sx={{ pt: 0 }}
             direction='column'
@@ -102,7 +89,7 @@ const Publish = () => {
       </Container>
 
       <Container maxWidth="md">
-        <Paper variant="outlined" spac sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
           <Stack
             sx={{ pt: 0 }}
             direction='column'
@@ -113,75 +100,8 @@ const Publish = () => {
               <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
                 Imagens
               </Typography>
-              <Typography component="div" variant="body2" color="text.secondary" gutterBottom>
-                A primeira imagem é a foto principal do seu anúncio.
-              </Typography>
-              <Box align="center" sx={{
-                p: 5,
-                borderStyle: 'dotted',
-                borderRadius: 1,
-                bgcolor: 'background.default',
-                '&:hover': {
-                  backgroundColor: 'background.default',
-                  opacity: [0.9, 0.8, 0.7],
-                },
-              }}>
-                <Typography component="div" variant="body2" color="text.secondary">
-                  Clique para adicionar as imagens ou as arraste para área demarcada.
-                </Typography>
-              </Box>
-              <Typography component="div" variant="body2" color="text.primary" sx={{ py: 1 }} gutterBottom>
-                Pré-visualização:
-              </Typography>
 
-              <Box
-                sx={{
-                  position: 'relative',
-                  width: 200,
-                  height: 150,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center',
-                  backgroundImage: 'url(https://source.unsplash.com/1600x900/?products)',
-                }}
-              >
-                <Box
-                  className='mainImage'
-                  backgroundColor='primary.main'
-                  sx={{
-                    py: 0,
-                    px: 2,
-                    height: 0.24,
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                  }}
-                >
-                  <Typography component="div" variant="body2" color='background.default' sx={{ py: 1 }} gutterBottom>
-                    Principal
-                  </Typography>
-                </Box>
-                <Box sx={{
-                  display: 'flex',
-                  width: '100%',
-                  height: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.87)',
-                  },
-                  '& .iconButtonDeleteForever': {
-                    display: "none"
-                  },
-                  '&:hover .iconButtonDeleteForever': {
-                    display: "block"
-                  }
-
-                }}>
-                  <IconButton className='iconButtonDeleteForever' color="secondary">
-                    <DeleteForever fontSize='large' />
-                  </IconButton>
-                </Box>
-              </Box>
+              <Dropzone />
 
             </Box>
           </Stack>
@@ -189,7 +109,7 @@ const Publish = () => {
       </Container >
 
       <Container maxWidth="md">
-        <Paper variant="outlined" spac sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
           <Stack
             sx={{ pt: 0 }}
             direction='column'
@@ -215,7 +135,7 @@ const Publish = () => {
       </Container>
 
       <Container maxWidth="md">
-        <Paper variant="outlined" spac sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
           <Stack
             sx={{ pt: 0 }}
             direction='column'
