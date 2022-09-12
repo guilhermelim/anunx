@@ -19,7 +19,7 @@ export default function Index() {
           </Typography>
 
           <SelectColorMode />
-
+          <br /><br />
           <ToggleColorMode />
 
           <Link href="/about">
