@@ -1,27 +1,85 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React from 'react'
 import Link from '../src/utility/Link';
+import { Stack, Container, Box, Grid, Card, CardMedia, Typography, CardContent, Button, TextField, InputBase, IconButton, FormControl, InputLabel, FilledInput, InputAdornment, Paper } from "@mui/material"
 
 import TemplateDefault from '../src/templates/Default'
-import SelectColorMode from '../src/components/theme/SelectColorMode'
-import ToggleColorMode from '../src/components/theme/ToggleColorMode'
+import SearchIcon from '@mui/icons-material/Search'
+import SearchOutlined from '@mui/icons-material/SearchOutlined'
 
-export default function Index() {
+const cards = [1, 2, 3]
+const Home = () => {
 
   return (
     <TemplateDefault>
+
+      <Container maxWidth="sm" sx={{ pt: 8, pb: 2, }}>
+        <Typography
+          component="h1"
+          variant="h3"
+          align="center"
+          color="text.primary"
+          gutterBottom
+        >
+          O que deseja encontrar?
+        </Typography>
+
+        <Paper sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          px: 2,
+          py: 0.2,
+        }}
+        >
+          <InputBase
+            placeholder='Ex.: iPhone 12 com garantia'
+            fullWidth
+          />
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </Container>
+
       <Container maxWidth="md">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Next.js example
+        <Container sx={{ py: 5 }} maxWidth="md">
+          <Typography
+            component="h2"
+            variant="h4"
+            align="center"
+            color="text.primary"
+            gutterBottom
+          >
+            Destaques
           </Typography>
 
-          <SelectColorMode />
-          <br /><br />
-          <ToggleColorMode />
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                >
+                  <CardMedia
+                    component="img"
+                    height='151'
+                    // sx={{ // 16:9 pt: '56.25%',}}
+                    image='https://source.unsplash.com/1600x900/?products'
+                    alt='random'
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Produto X
+                    </Typography>
+                    <Typography>
+                      R$ 60,00
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
 
+        <Box sx={{ my: 1 }}>
           <Link href="/about">
             Go to the about page
           </Link>
@@ -30,3 +88,5 @@ export default function Index() {
     </TemplateDefault>
   )
 }
+
+export default Home
