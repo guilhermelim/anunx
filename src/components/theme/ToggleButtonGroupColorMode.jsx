@@ -15,15 +15,17 @@ const ToggleButtonGroupColorMode = () => {
 
   const [mode, setMode] = React.useState(theme)
   const handleChange = (event, newMode) => {
-    setMode(newMode)
-    // console.log(newMode)
-    // change theme
-    setTheme(newMode)
-    // play sound
-    const themeNow = newMode === 'system' ? systemTheme : newMode
-    const themeBefore = resolvedTheme
-    if (themeNow !== themeBefore) {
-      themeBefore === "light" ? playOff() : playOn()
+    if (newMode !== null) {
+      // change mode in ToggleButtonGroup
+      setMode(newMode)
+      // change theme
+      setTheme(newMode)
+      // play sound
+      const themeNow = newMode === 'system' ? systemTheme : newMode
+      const themeBefore = resolvedTheme
+      if (themeNow !== themeBefore) {
+        themeBefore === "light" ? playOff() : playOn()
+      }
     }
   }
 
