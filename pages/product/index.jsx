@@ -1,18 +1,11 @@
 import { Card, CardHeader, CardMedia, Chip, Container, Grid, Paper, Typography } from '@mui/material'
 import Carousel from 'react-material-ui-carousel'
 
-import TemplateDefault from '../src/templates/Default'
-import Avatar from '../src/components/Avatar'
+import TemplateDefault from '../../src/templates/Default'
+import Avatar from '../../src/components/Avatar'
 
 
 const product = () => {
-
-  const getInitialsFromName = (nameString) => {
-    const fullName = nameString.split(' ');
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
-    return initials.toUpperCase();
-  }
-
   return (
     <TemplateDefault>
       <Container maxWidth="lg">
