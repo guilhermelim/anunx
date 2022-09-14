@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, Typography, Button, IconButton, Tooltip, Avatar, Menu } from '@mui/material'
+import { Box, Typography, Button, IconButton, Tooltip, Menu } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import MenuAvatar from './MenuAvatar'
-
+import Avatar from '../Avatar'
 
 const ButtonAvatar = () => {
   const [anchorUserMenu, setAnchorUserMenu] = React.useState(null);
@@ -20,6 +20,7 @@ const ButtonAvatar = () => {
     const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
     return initials.toUpperCase();
   }
+
   return (
     <Box sx={{ pl: 1, flexGrow: 0 }}>
       <Button color="inherit" variant="text" onClick={handleOpenUserMenu}>
@@ -27,18 +28,9 @@ const ButtonAvatar = () => {
           <IconButton variant="text" sx={{ p: 0 }}>
             {
               true === true
-                ?
-                <>
-                  <Avatar
-                    alt="Guilherme Lima"
-                    src="https://avatars.githubusercontent.com/guilhermelim"
-                  >
-                    {getInitialsFromName('Guilherme Lima')}
-                  </Avatar>
-                </>
+                ? <Avatar name="Guilherme Lima" image="https://avatars.githubusercontent.com/guilhermelim" />
                 : <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
             }
-
           </IconButton>
         </Tooltip>
         <Typography variant="subtitle2" component="div" sx={{ ml: 1, flexGrow: 1, color: 'white' }}>
