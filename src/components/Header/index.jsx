@@ -11,9 +11,12 @@ const Header = () => {
       <AppBar position="static" elevation={3}>
         <Container maxWidth='lg'>
           <Toolbar>
-            <Typography variant="h6" color='inherit' component={Link} href="/" sx={{ ml: 0, flexGrow: 1, textDecoration: 'none' }}>
-              Anunx
-            </Typography>
+            <Box sx={{ flexGrow: 1 }} >
+              <Typography variant="h6" color='inherit' component={Link} href="/" sx={{ textDecoration: 'none' }}>
+                Anunx
+              </Typography>
+            </Box>
+
 
             <Button
               color="inherit"
@@ -31,7 +34,7 @@ const Header = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </Box>
+    </Box >
   )
 }
 
