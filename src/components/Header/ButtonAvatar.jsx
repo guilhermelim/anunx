@@ -15,12 +15,6 @@ const ButtonAvatar = () => {
     setAnchorUserMenu(null);
   }
 
-  const getInitialsFromName = (nameString) => {
-    const fullName = nameString.split(' ');
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
-    return initials.toUpperCase();
-  }
-
   return (
     <Box sx={{ pl: 1, flexGrow: 0 }}>
       <Button color="inherit" variant="text" onClick={handleOpenUserMenu}>
