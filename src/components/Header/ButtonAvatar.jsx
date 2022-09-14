@@ -1,9 +1,10 @@
 import React from 'react'
-import { Box, Typography, Button, IconButton, Tooltip, Menu } from '@mui/material'
+import { Box, Typography, Button, IconButton, Tooltip, Menu, Card, CardMedia, CardContent } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import MenuAvatar from './MenuAvatar'
 import Avatar from '../Avatar'
+import { Stack } from '@mui/system'
 
 const ButtonAvatar = () => {
   const [anchorUserMenu, setAnchorUserMenu] = React.useState(null);
@@ -17,7 +18,14 @@ const ButtonAvatar = () => {
 
   return (
     <Box sx={{ pl: 1, flexGrow: 0 }}>
-      <Button color="inherit" variant="text" onClick={handleOpenUserMenu}>
+
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}
+        color="inherit" variant="text" onClick={handleOpenUserMenu}
+      >
         <Tooltip title="Abrir Configurações">
           <IconButton variant="text" sx={{ p: 0 }}>
             {
@@ -27,10 +35,10 @@ const ButtonAvatar = () => {
             }
           </IconButton>
         </Tooltip>
-        <Typography variant="subtitle2" component="div" sx={{ ml: 1, flexGrow: 1, color: 'white' }}>
+        <Typography variant="subtitle2" component="div" sx={{ ml: 1, flexGrow: 1, color: 'white', textTransform: 'uppercase' }}>
           Guilherme Lima
         </Typography>
-      </Button>
+      </Stack>
 
       <Menu
         sx={{ mt: '45px' }}
