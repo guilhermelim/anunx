@@ -9,9 +9,9 @@ import { Container } from '@mui/system'
 
 const Footer = () => {
   return (
-    <Container maxWidth="lg" component="footer" sx={{ p: 8 }}>
+    <Container maxWidth="lg" component="footer" sx={{ pb: 6 }}>
 
-      <Divider sx={{ my: 3 }} />
+      <Divider sx={{ mb: 4 }} />
 
       <Grid
         container

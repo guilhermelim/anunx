@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <TemplateDefault>
 
-      <Container maxWidth="sm" sx={{ pt: 8, pb: 2, }}>
+      <Container maxWidth="sm">
         <Typography
           component="h1"
           variant="h3"
@@ -40,7 +40,7 @@ const Home = () => {
         </Paper>
       </Container>
 
-      <Container sx={{ py: 5 }} maxWidth="lg">
+      <Container sx={{ pt: 5 }} maxWidth="lg">
         <Typography
           component="h2"
           variant="h4"

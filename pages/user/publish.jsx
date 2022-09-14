@@ -30,7 +30,7 @@ const Publish = () => {
   return (
     <TemplateDefault TemplateDefault >
 
-      <Box sx={{ pt: 8, pb: 0, }}>
+      <Box>
         <Container maxWidth="sm">
           <Typography
             component="h1"
