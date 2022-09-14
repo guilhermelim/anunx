@@ -78,13 +78,6 @@ const Home = () => {
         </Grid>
       </Container>
 
-      <Container maxWidth="lg">
-        <Box sx={{ my: 1 }}>
-          <Link href="/about">
-            Go to the about page
-          </Link>
-        </Box>
-      </Container>
     </TemplateDefault>
   )
 }
