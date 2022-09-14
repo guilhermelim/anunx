@@ -1,4 +1,5 @@
-import { Box, Card, CardHeader, CardMedia, Chip, Container, Grid, Paper, Typography } from '@mui/material'
+import { Card, CardHeader, CardMedia, Chip, Container, Grid, Paper, Typography } from '@mui/material'
+import Carousel from 'react-material-ui-carousel'
 
 import TemplateDefault from '../src/templates/Default'
 import Avatar from '../src/components/Avatar'
@@ -19,7 +20,35 @@ const product = () => {
           <Grid item xs={8}>
 
             <Paper elevation={2} sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
-              <Typography component="h6" variant="h6">Carrossel</Typography>
+              <Typography component="h6" variant="h6" sx={{ pb: 2 }}>Carrossel</Typography>
+              <Carousel
+                autoPlay
+                indicators
+                swipe
+                cycleNavigation
+                navButtonsAlwaysVisible
+                animation="fade"
+                duration={3000}
+              >
+                <Card sx={{ height: '100%' }}>
+                  <CardMedia
+                    sx={{ pt: '56%' }}
+                    image="https://source.unsplash.com/random"
+                    title="Título da imagem"
+                    alt="Título da imagem"
+                  />
+                </Card>
+
+                <Card sx={{ height: '100%' }}>
+                  <CardMedia
+                    sx={{ pt: '56%' }}
+                    image="https://source.unsplash.com/random?a=2"
+                    title="Título da imagem"
+                    alt="Título da imagem"
+                  />
+                </Card>
+              </Carousel>
+
             </Paper>
 
             <Paper elevation={2} sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
