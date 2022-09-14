@@ -15,7 +15,14 @@ const Header = () => {
               Anunx
             </Typography>
 
-            <Button color="inherit" variant="outlined" component={Link} noLinkStyle href="/user/publish">
+            <Button
+              color="inherit"
+              variant="outlined"
+              component={Link}
+              noLinkStyle
+              href="/user/publish"
+              sx={{ display: { xs: 'none', sm: 'flex' } }}
+            >
               Anunciar e Vender
             </Button>
 
