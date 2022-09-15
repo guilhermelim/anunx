@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { Formik } from 'formik'
+import * as yup from 'yup'
+
 import {
   Container,
   Box,
@@ -15,10 +18,18 @@ import {
   InputAdornment,
   OutlinedInput
 } from '@mui/material'
-import TemplateDefault from '../../src/templates/Default'
 
+import TemplateDefault from '../../src/templates/Default'
 import Dropzone from '../../src/components/Dropzone'
 
+
+
+let validationSchema = yup.object().shape({
+  title: yup.string()
+    .min(6, 'Escreva um título maior')
+    .max(100, 'Título muito grande')
+    .required('Campo obrigatório'),
+})
 
 const Publish = () => {
   const [category, setCategory] = useState('')
@@ -47,173 +58,209 @@ const Publish = () => {
         </Container>
       </Box>
 
-      <Container maxWidth="md">
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
-          <Stack
-            sx={{ pt: 0 }}
-            direction='column'
-            spacing={4}
-            justifyContent='center'
-          >
-            <Box>
-              <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                Título do Anúncio
-              </Typography>
-              <TextField required id="standard-required" variant="standard" fullWidth={true} label="Nome do Produto" />
-            </Box>
-            <Box>
-              <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                Categoria
-              </Typography>
-              <Select
-                value={category}
-                onChange={handleChangeCategory}
-                displayEmpty
-                fullWidth
-              >
-                <MenuItem value=''>Selecione</MenuItem>
-                <MenuItem value={1}>Bebê e Criança</MenuItem>
-                <MenuItem value={2}>Agricultura</MenuItem>
-                <MenuItem value={3}>Moda</MenuItem>
-                <MenuItem value={4}>Carros, Motos e Barcos</MenuItem>
-                <MenuItem value={5}>Serviços</MenuItem>
-                <MenuItem value={6}>Lazer</MenuItem>
-                <MenuItem value={7}>Animais</MenuItem>
-                <MenuItem value={8}>Moveis, Casa e Jardim</MenuItem>
-                <MenuItem value={9}>Imóveis</MenuItem>
-                <MenuItem value={10}>Equipamentos e Ferramentas</MenuItem>
-                <MenuItem value={11}>Celulares e Tablets</MenuItem>
-                <MenuItem value={12}>Esporte</MenuItem>
-                <MenuItem value={13}>Tecnologia</MenuItem>
-                <MenuItem value={14}>Emprego</MenuItem>
-                <MenuItem value={15}>Outros</MenuItem>
-              </Select>
-            </Box>
-          </Stack>
-        </Paper>
-      </Container>
+      <Formik
+        initialValues={{
+          title: ''
+        }}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          console.log('ok, enviou o form', values)
+        }}
+      >
+        {
+          ({
+            values,
+            errors,
+            handleChange,
+            handleSubmit,
 
-      <Container maxWidth="md">
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
-          <Stack
-            sx={{ pt: 0 }}
-            direction='column'
-            spacing={4}
-            justifyContent='center'
-          >
-            <Box>
-              <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                Imagens
-              </Typography>
+          }) => {
+            console.log(errors)
+            return (
+              <form onSubmit={handleSubmit}>
+                <Container maxWidth="md" className='AdTitle'>
+                  <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+                    <Stack
+                      sx={{ pt: 0 }}
+                      direction='column'
+                      spacing={4}
+                      justifyContent='center'
+                    >
+                      <Box>
+                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
+                          Título do Anúncio
+                        </Typography>
+                        <TextField
+                          name="title"
+                          value={values.title}
+                          onChange={handleChange}
 
-              <Dropzone />
+                          required
+                          variant="standard"
+                          fullWidth={true}
+                          label="Nome do Produto"
+                          error={errors.title}
+                          helperText={errors.title}
+                        />
+                      </Box>
+                      <Box>
+                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
+                          Categoria
+                        </Typography>
+                        <Select
+                          value={category}
+                          onChange={handleChangeCategory}
+                          displayEmpty
+                          fullWidth
+                        >
+                          <MenuItem value=''>Selecione</MenuItem>
+                          <MenuItem value={1}>Bebê e Criança</MenuItem>
+                          <MenuItem value={2}>Agricultura</MenuItem>
+                          <MenuItem value={3}>Moda</MenuItem>
+                          <MenuItem value={4}>Carros, Motos e Barcos</MenuItem>
+                          <MenuItem value={5}>Serviços</MenuItem>
+                          <MenuItem value={6}>Lazer</MenuItem>
+                          <MenuItem value={7}>Animais</MenuItem>
+                          <MenuItem value={8}>Moveis, Casa e Jardim</MenuItem>
+                          <MenuItem value={9}>Imóveis</MenuItem>
+                          <MenuItem value={10}>Equipamentos e Ferramentas</MenuItem>
+                          <MenuItem value={11}>Celulares e Tablets</MenuItem>
+                          <MenuItem value={12}>Esporte</MenuItem>
+                          <MenuItem value={13}>Tecnologia</MenuItem>
+                          <MenuItem value={14}>Emprego</MenuItem>
+                          <MenuItem value={15}>Outros</MenuItem>
+                        </Select>
+                      </Box>
+                    </Stack>
+                  </Paper>
+                </Container>
 
-            </Box>
-          </Stack>
-        </Paper>
-      </Container >
+                <Container maxWidth="md" className='AdImagens'>
+                  <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+                    <Stack
+                      sx={{ pt: 0 }}
+                      direction='column'
+                      spacing={4}
+                      justifyContent='center'
+                    >
+                      <Box>
+                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
+                          Imagens
+                        </Typography>
 
-      <Container maxWidth="md">
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
-          <Stack
-            sx={{ pt: 0 }}
-            direction='column'
-            spacing={4}
-            justifyContent='center'
-          >
-            <Box>
-              <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                Descrição
-              </Typography>
-              <Typography component="div" variant="body2" color="text.secondary" gutterBottom>
-                Descreva as informações e especificações do produto.
-              </Typography>
-              <TextField
-                fullWidth={true}
-                multiline
-                rows={6}
-                defaultValue="Informações do produto..."
-              />
-            </Box>
-          </Stack>
-        </Paper>
-      </Container>
+                        <Dropzone />
 
-      <Container maxWidth="md">
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
-          <Stack
-            sx={{ pt: 0 }}
-            direction='column'
-            spacing={4}
-            justifyContent='center'
-          >
-            <Box>
-              <Typography component="h6" variant="h6" color="text.primary" gutterBottom sx={{ pb: 1 }}>
-                Preço
-              </Typography>
+                      </Box>
+                    </Stack>
+                  </Paper>
+                </Container >
 
-              <FormControl fullWidth>
-                <InputLabel>Valor</InputLabel>
-                <OutlinedInput
-                  onChange={() => { }}
-                  startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-                  label="Valor"
-                />
-              </FormControl>
+                <Container maxWidth="md" className='AdDescription'>
+                  <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+                    <Stack
+                      sx={{ pt: 0 }}
+                      direction='column'
+                      spacing={4}
+                      justifyContent='center'
+                    >
+                      <Box>
+                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
+                          Descrição
+                        </Typography>
+                        <Typography component="div" variant="body2" color="text.secondary" gutterBottom>
+                          Descreva as informações e especificações do produto.
+                        </Typography>
+                        <TextField
+                          fullWidth={true}
+                          multiline
+                          rows={6}
+                          defaultValue="Informações do produto..."
+                        />
+                      </Box>
+                    </Stack>
+                  </Paper>
+                </Container>
 
-            </Box>
-          </Stack>
-        </Paper>
-      </Container>
+                <Container maxWidth="md" className='AddPrice'>
+                  <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+                    <Stack
+                      sx={{ pt: 0 }}
+                      direction='column'
+                      spacing={4}
+                      justifyContent='center'
+                    >
+                      <Box>
+                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom sx={{ pb: 1 }}>
+                          Preço
+                        </Typography>
 
-      <Container maxWidth="md">
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
-          <Stack
-            sx={{ pt: 0 }}
-            direction='column'
-            spacing={4}
-            justifyContent='center'
-          >
-            <Box>
-              <Typography component="h6" variant="h6" color="text.primary" gutterBottom sx={{ pb: 2 }}>
-                Dados de contato
-              </Typography>
+                        <FormControl fullWidth>
+                          <InputLabel>Valor</InputLabel>
+                          <OutlinedInput
+                            onChange={() => { }}
+                            startAdornment={<InputAdornment position="start">R$</InputAdornment>}
+                            label="Valor"
+                          />
+                        </FormControl>
 
-              <TextField
-                fullWidth
-                label='Nome'
-                variant='outlined'
-                size='small'
-                placeholder='Seu nome'
-                sx={{ pb: 2 }}
-              />
+                      </Box>
+                    </Stack>
+                  </Paper>
+                </Container>
 
-              <TextField
-                fullWidth
-                label='E-mail'
-                variant='outlined'
-                size='small'
-                placeholder='email@exemple.com'
-                sx={{ pb: 2 }}
-              />
+                <Container maxWidth="md" className='AdContact'>
+                  <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+                    <Stack
+                      sx={{ pt: 0 }}
+                      direction='column'
+                      spacing={4}
+                      justifyContent='center'
+                    >
+                      <Box>
+                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom sx={{ pb: 2 }}>
+                          Dados de contato
+                        </Typography>
 
-              <TextField
-                fullWidth
-                label='Telefone'
-                variant='outlined'
-                size='small'
-                placeholder='85 99999-9999'
-              />
-            </Box>
-          </Stack>
-        </Paper>
-      </Container>
+                        <TextField
+                          fullWidth
+                          label='Nome'
+                          variant='outlined'
+                          size='small'
+                          placeholder='Seu nome'
+                          sx={{ pb: 2 }}
+                        />
 
-      <Container maxWidth="md">
-        <Box textAlign='right'>
-          <Button variant="contained" sx={{ textTransform: 'uppercase' }}>Publicar Anúncio</Button>
-        </Box>
-      </Container>
+                        <TextField
+                          fullWidth
+                          label='E-mail'
+                          variant='outlined'
+                          size='small'
+                          placeholder='email@exemple.com'
+                          sx={{ pb: 2 }}
+                        />
+
+                        <TextField
+                          fullWidth
+                          label='Telefone'
+                          variant='outlined'
+                          size='small'
+                          placeholder='85 99999-9999'
+                        />
+                      </Box>
+                    </Stack>
+                  </Paper>
+                </Container>
+
+                <Container maxWidth="md" className='AddSubmit'>
+                  <Box textAlign='right'>
+                    <Button type="submit" variant="contained" sx={{ textTransform: 'uppercase' }}>Publicar Anúncio</Button>
+                  </Box>
+                </Container>
+              </form>
+            )
+          }
+        }
+      </Formik>
 
     </TemplateDefault >
   )
