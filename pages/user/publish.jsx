@@ -14,9 +14,9 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Input,
   InputAdornment,
-  OutlinedInput
+  OutlinedInput,
+  FormHelperText
 } from '@mui/material'
 
 import TemplateDefault from '../../src/templates/Default'
@@ -29,14 +29,13 @@ let validationSchema = yup.object().shape({
     .min(6, 'Escreva um título maior')
     .max(100, 'Título muito grande')
     .required('Campo obrigatório'),
+
+  category: yup.string()
+    .min(6, 'Escreva um título maior')
+    .required('Campo obrigatório'),
 })
 
 const Publish = () => {
-  const [category, setCategory] = useState('')
-
-  const handleChangeCategory = (event) => {
-    setCategory(event.target.value);
-  }
 
   return (
     <TemplateDefault TemplateDefault >
@@ -60,7 +59,8 @@ const Publish = () => {
 
       <Formik
         initialValues={{
-          title: ''
+          title: '',
+          // category: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -107,29 +107,41 @@ const Publish = () => {
                         <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
                           Categoria
                         </Typography>
-                        <Select
-                          value={category}
-                          onChange={handleChangeCategory}
-                          displayEmpty
-                          fullWidth
-                        >
-                          <MenuItem value=''>Selecione</MenuItem>
-                          <MenuItem value={1}>Bebê e Criança</MenuItem>
-                          <MenuItem value={2}>Agricultura</MenuItem>
-                          <MenuItem value={3}>Moda</MenuItem>
-                          <MenuItem value={4}>Carros, Motos e Barcos</MenuItem>
-                          <MenuItem value={5}>Serviços</MenuItem>
-                          <MenuItem value={6}>Lazer</MenuItem>
-                          <MenuItem value={7}>Animais</MenuItem>
-                          <MenuItem value={8}>Moveis, Casa e Jardim</MenuItem>
-                          <MenuItem value={9}>Imóveis</MenuItem>
-                          <MenuItem value={10}>Equipamentos e Ferramentas</MenuItem>
-                          <MenuItem value={11}>Celulares e Tablets</MenuItem>
-                          <MenuItem value={12}>Esporte</MenuItem>
-                          <MenuItem value={13}>Tecnologia</MenuItem>
-                          <MenuItem value={14}>Emprego</MenuItem>
-                          <MenuItem value={15}>Outros</MenuItem>
-                        </Select>
+
+                        <FormControl error={errors.category} fullWidth >
+
+                          <Select
+                            name="category"
+                            value={values.category}
+                            fullWidth
+                            onChange={handleChange}
+                          >
+                            <MenuItem value="Bebê e Criança">Bebê e Criança</MenuItem>
+                            <MenuItem value="Agricultura">Agricultura</MenuItem>
+                            <MenuItem value="Moda">Moda</MenuItem>
+                            <MenuItem value="Carros, Motos e Barcos">Carros, Motos e Barcos</MenuItem>
+                            <MenuItem value="Serviços">Serviços</MenuItem>
+                            <MenuItem value="Lazer">Lazer</MenuItem>
+                            <MenuItem value="Animais">Animais</MenuItem>
+                            <MenuItem value="Moveis, Casa e Jardim">Moveis, Casa e Jardim</MenuItem>
+                            <MenuItem value="Imóveis">Imóveis</MenuItem>
+                            <MenuItem value="Equipamentos e Ferramentas">Equipamentos e Ferramentas</MenuItem>
+                            <MenuItem value="Celulares e Tablets">Celulares e Tablets</MenuItem>
+                            <MenuItem value="Esporte">Esporte</MenuItem>
+                            <MenuItem value="Tecnologia">Tecnologia</MenuItem>
+                            <MenuItem value="Emprego">Emprego</MenuItem>
+                            <MenuItem value="Outros">Outros</MenuItem>
+                          </Select>
+
+                          <FormHelperText>
+                            {
+                              errors.category
+                            }
+                          </FormHelperText>
+
+                        </FormControl>
+
+
                       </Box>
                     </Stack>
                   </Paper>
