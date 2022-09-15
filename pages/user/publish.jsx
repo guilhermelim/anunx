@@ -9,6 +9,11 @@ import {
   TextField,
   Select,
   MenuItem,
+  FormControl,
+  InputLabel,
+  Input,
+  InputAdornment,
+  OutlinedInput
 } from '@mui/material'
 import TemplateDefault from '../../src/templates/Default'
 
@@ -25,7 +30,7 @@ const Publish = () => {
   return (
     <TemplateDefault TemplateDefault >
 
-      <Box sx={{ pt: 8, pb: 0, }}>
+      <Box>
         <Container maxWidth="sm">
           <Typography
             component="h1"
@@ -54,7 +59,7 @@ const Publish = () => {
               <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
                 Título do Anúncio
               </Typography>
-              <TextField required id="standard-required" variant="standard" fullWidth={true} label="ex.: Bicicleta aro 18 com garantia" />
+              <TextField required id="standard-required" variant="standard" fullWidth={true} label="Nome do Produto" />
             </Box>
             <Box>
               <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
@@ -129,6 +134,33 @@ const Publish = () => {
                 rows={6}
                 defaultValue="Informações do produto..."
               />
+            </Box>
+          </Stack>
+        </Paper>
+      </Container>
+
+      <Container maxWidth="md">
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
+          <Stack
+            sx={{ pt: 0 }}
+            direction='column'
+            spacing={4}
+            justifyContent='center'
+          >
+            <Box>
+              <Typography component="h6" variant="h6" color="text.primary" gutterBottom sx={{ pb: 1 }}>
+                Preço
+              </Typography>
+
+              <FormControl fullWidth>
+                <InputLabel>Valor</InputLabel>
+                <OutlinedInput
+                  onChange={() => { }}
+                  startAdornment={<InputAdornment position="start">R$</InputAdornment>}
+                  label="Valor"
+                />
+              </FormControl>
+
             </Box>
           </Stack>
         </Paper>

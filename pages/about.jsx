@@ -15,6 +15,9 @@ export default function About() {
         <Button variant="contained" component={Link} noLinkStyle href="/">
           Go to the main page
         </Button>
+        <Link href="/about">
+          Go to the about page
+        </Link>
       </Box>
     </Container>
   );
