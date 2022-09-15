@@ -16,7 +16,8 @@ import {
   InputLabel,
   InputAdornment,
   OutlinedInput,
-  FormHelperText
+  FormHelperText,
+  Input
 } from '@mui/material'
 
 import TemplateDefault from '../../src/templates/Default'
@@ -31,7 +32,10 @@ let validationSchema = yup.object().shape({
     .required('Campo obrigatório'),
 
   category: yup.string()
-    .min(6, 'Escreva um título maior')
+    .required('Campo obrigatório'),
+
+  description: yup.string()
+    .min(50, 'Escreva uma descrição com pelo menos 50 caracteres.')
     .required('Campo obrigatório'),
 })
 
@@ -60,7 +64,8 @@ const Publish = () => {
       <Formik
         initialValues={{
           title: '',
-          // category: '',
+          category: '',
+          description: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -69,15 +74,16 @@ const Publish = () => {
       >
         {
           ({
+            touched,
             values,
             errors,
             handleChange,
             handleSubmit,
 
           }) => {
-            console.log(errors)
             return (
               <form onSubmit={handleSubmit}>
+
                 <Container maxWidth="md" className='AdTitle'>
                   <Paper variant="outlined" sx={{ my: { xs: 3, md: 3 }, p: { xs: 2, md: 3 } }}>
                     <Stack
@@ -86,62 +92,60 @@ const Publish = () => {
                       spacing={4}
                       justifyContent='center'
                     >
-                      <Box>
-                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                          Título do Anúncio
-                        </Typography>
-                        <TextField
+
+                      <FormControl error={errors.title && touched.title} variant="standard" fullWidth>
+                        <InputLabel sx={{ fontWeight: 400, color: 'text.primary' }}>Título do Anúncio</InputLabel>
+
+                        <Input
                           name="title"
                           value={values.title}
                           onChange={handleChange}
-
-                          variant="standard"
-                          fullWidth={true}
-                          label="Nome do Produto"
-                          error={errors.title}
-                          helperText={errors.title}
+                          label="Título do Anúncio"
                         />
-                      </Box>
-                      <Box>
-                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                          Categoria
-                        </Typography>
 
-                        <FormControl error={errors.category} fullWidth >
+                        <FormHelperText>
+                          {errors.title && touched.title ? errors.title : null}
+                        </FormHelperText>
+                      </FormControl>
 
-                          <Select
-                            name="category"
-                            value={values.category}
-                            fullWidth
-                            onChange={handleChange}
-                          >
-                            <MenuItem value="Bebê e Criança">Bebê e Criança</MenuItem>
-                            <MenuItem value="Agricultura">Agricultura</MenuItem>
-                            <MenuItem value="Moda">Moda</MenuItem>
-                            <MenuItem value="Carros, Motos e Barcos">Carros, Motos e Barcos</MenuItem>
-                            <MenuItem value="Serviços">Serviços</MenuItem>
-                            <MenuItem value="Lazer">Lazer</MenuItem>
-                            <MenuItem value="Animais">Animais</MenuItem>
-                            <MenuItem value="Moveis, Casa e Jardim">Moveis, Casa e Jardim</MenuItem>
-                            <MenuItem value="Imóveis">Imóveis</MenuItem>
-                            <MenuItem value="Equipamentos e Ferramentas">Equipamentos e Ferramentas</MenuItem>
-                            <MenuItem value="Celulares e Tablets">Celulares e Tablets</MenuItem>
-                            <MenuItem value="Esporte">Esporte</MenuItem>
-                            <MenuItem value="Tecnologia">Tecnologia</MenuItem>
-                            <MenuItem value="Emprego">Emprego</MenuItem>
-                            <MenuItem value="Outros">Outros</MenuItem>
-                          </Select>
+                      <FormControl error={errors.category && touched.category} variant="standard" fullWidth>
+                        <InputLabel sx={{ fontWeight: 400, color: 'text.primary' }}>Categoria</InputLabel>
 
-                          <FormHelperText>
-                            {
-                              errors.category
-                            }
-                          </FormHelperText>
+                        <Select
 
-                        </FormControl>
+                          name="category"
+                          value={values.category}
+                          onChange={handleChange}
+                          label="Categoria"
+                          fullWidth
+                        >
+                          <MenuItem value="Bebê e Criança">Bebê e Criança</MenuItem>
+                          <MenuItem value="Agricultura">Agricultura</MenuItem>
+                          <MenuItem value="Moda">Moda</MenuItem>
+                          <MenuItem value="Carros, Motos e Barcos">Carros, Motos e Barcos</MenuItem>
+                          <MenuItem value="Serviços">Serviços</MenuItem>
+                          <MenuItem value="Lazer">Lazer</MenuItem>
+                          <MenuItem value="Animais">Animais</MenuItem>
+                          <MenuItem value="Moveis, Casa e Jardim">Moveis, Casa e Jardim</MenuItem>
+                          <MenuItem value="Imóveis">Imóveis</MenuItem>
+                          <MenuItem value="Equipamentos e Ferramentas">Equipamentos e Ferramentas</MenuItem>
+                          <MenuItem value="Celulares e Tablets">Celulares e Tablets</MenuItem>
+                          <MenuItem value="Esporte">Esporte</MenuItem>
+                          <MenuItem value="Tecnologia">Tecnologia</MenuItem>
+                          <MenuItem value="Emprego">Emprego</MenuItem>
+                          <MenuItem value="Outros">Outros</MenuItem>
+                        </Select>
 
+                        <FormHelperText>
+                          {
+                            errors.category && touched.category
+                              ? errors.category
+                              : null
+                          }
+                        </FormHelperText>
 
-                      </Box>
+                      </FormControl>
+
                     </Stack>
                   </Paper>
                 </Container>
@@ -155,6 +159,7 @@ const Publish = () => {
                       justifyContent='center'
                     >
                       <Box>
+
                         <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
                           Imagens
                         </Typography>
@@ -174,20 +179,26 @@ const Publish = () => {
                       spacing={4}
                       justifyContent='center'
                     >
-                      <Box>
-                        <Typography component="h6" variant="h6" color="text.primary" gutterBottom>
-                          Descrição
-                        </Typography>
-                        <Typography component="div" variant="body2" color="text.secondary" gutterBottom>
-                          Descreva as informações e especificações do produto.
-                        </Typography>
-                        <TextField
-                          fullWidth={true}
+                      <FormControl error={errors.description && touched.description} variant="standard" fullWidth>
+
+                        <InputLabel sx={{ fontWeight: 400, color: 'text.primary' }}>Descreva as informações e especificações do produto</InputLabel>
+
+                        <Input
+                          name="description"
+                          value={values.description}
+                          onChange={handleChange}
+                          label="Descreva as informações e especificações do produto"
                           multiline
                           rows={6}
-                          defaultValue="Informações do produto..."
                         />
-                      </Box>
+                        <FormHelperText>
+                          {
+                            errors.description
+                          }
+                        </FormHelperText>
+
+                      </FormControl>
+
                     </Stack>
                   </Paper>
                 </Container>
@@ -267,6 +278,7 @@ const Publish = () => {
                     <Button type="submit" variant="contained" sx={{ textTransform: 'uppercase' }}>Publicar Anúncio</Button>
                   </Box>
                 </Container>
+
               </form>
             )
           }
