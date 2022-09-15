@@ -12,7 +12,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search'
 
 const cards = [1, 2, 3]
-const list = () => {
+const List = () => {
   return (
     <TemplateDefault>
 
@@ -71,4 +71,4 @@ const list = () => {
   )
 }
 
-export default list
+export default List

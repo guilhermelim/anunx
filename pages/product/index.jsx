@@ -5,7 +5,7 @@ import TemplateDefault from '../../src/templates/Default'
 import Avatar from '../../src/components/Avatar'
 
 
-const product = () => {
+const Product = () => {
   return (
     <TemplateDefault>
       <Container maxWidth="lg">
@@ -91,4 +91,4 @@ const product = () => {
   )
 }
 
-export default product
+export default Product
