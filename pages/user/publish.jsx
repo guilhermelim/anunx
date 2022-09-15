@@ -95,7 +95,6 @@ const Publish = () => {
                           value={values.title}
                           onChange={handleChange}
 
-                          required
                           variant="standard"
                           fullWidth={true}
                           label="Nome do Produto"
