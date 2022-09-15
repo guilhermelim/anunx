@@ -1,32 +1,76 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '../src/utility/Link';
+import {
+  Container,
+  Grid,
+  Typography,
+  InputBase,
+  IconButton,
+  Paper
+} from "@mui/material"
+import SearchIcon from '@mui/icons-material/Search'
 
 import TemplateDefault from '../src/templates/Default'
-import SelectColorMode from '../src/components/theme/SelectColorMode'
-import ToggleColorMode from '../src/components/theme/ToggleColorMode'
+import Card from '../src/components/Card'
 
-export default function Index() {
 
+const cards = [1, 2, 3]
+const Home = () => {
   return (
     <TemplateDefault>
-      <Container maxWidth="md">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Next.js example
-          </Typography>
 
-          <SelectColorMode />
-          <br /><br />
-          <ToggleColorMode />
+      <Container maxWidth="sm">
+        <Typography
+          component="h1"
+          variant="h3"
+          align="center"
+          color="text.primary"
+          gutterBottom
+        >
+          O que deseja encontrar?
+        </Typography>
 
-          <Link href="/about">
-            Go to the about page
-          </Link>
-        </Box>
+        <Paper sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          px: 2,
+          py: 0.2,
+        }}
+        >
+          <InputBase
+            placeholder='Ex.: iPhone 12 com garantia'
+            fullWidth
+          />
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+        </Paper>
       </Container>
+
+      <Container sx={{ pt: 5 }} maxWidth="lg">
+        <Typography
+          component="h2"
+          variant="h4"
+          align="center"
+          color="text.primary"
+          gutterBottom
+        >
+          Destaques
+        </Typography>
+
+        <Grid container spacing={4}>
+          {cards.map((card) => (
+            <Grid item key={card} xs={12} sm={6} md={4}>
+              <Card
+                title="Produto em Destaque"
+                subtitle="R$ 60,00"
+                image="https://source.unsplash.com/1600x900/?products"
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
     </TemplateDefault>
   )
 }
+
+export default Home

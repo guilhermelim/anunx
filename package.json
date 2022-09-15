@@ -15,11 +15,13 @@
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.2",
+    "@mui/styles": "^5.10.3",
     "next": "12.2.5",
     "next-themes": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",
+    "react-material-ui-carousel": "^2.3.10-mui5",
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
