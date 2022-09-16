@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   Container,
   Box,
@@ -80,7 +80,7 @@ const Dropzone = () => {
         }}
 
       >
-        <input {...getInputProps()} />
+        <input name="files" {...getInputProps()} />
         <Typography component="div" variant="body2" color="text.secondary">
           Clique para adicionar as imagens ou as arraste para área demarcada.
         </Typography>
