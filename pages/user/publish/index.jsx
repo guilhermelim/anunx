@@ -225,6 +225,7 @@ const Publish = () => {
                           <InputLabel sx={{ fontWeight: 400, color: 'text.primary' }}>E-mail</InputLabel>
                           <Input
                             name="email"
+                            type="email"
                             value={values.email}
                             onChange={handleChange}
                             label="E-mail"
