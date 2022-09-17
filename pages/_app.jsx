@@ -10,6 +10,7 @@ import { GlobalStyles } from '@mui/material'
 import PageProvider from '../src/utility/PageProvider'
 import PageCheckMounted from '../src/utility/PageCheckMounted'
 import { globalStyles } from '../src/theme'
+import { ToastyProvider } from '../src/contexts/Toasty'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -26,11 +27,13 @@ export default function MyApp(props) {
         </Head>
         <PageProvider>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <GlobalStyles styles={globalStyles} />
-          <PageCheckMounted>
-            <Component {...pageProps} />
-          </PageCheckMounted>
+          <ToastyProvider>
+            <CssBaseline />
+            <GlobalStyles styles={globalStyles} />
+            <PageCheckMounted>
+              <Component {...pageProps} />
+            </PageCheckMounted>
+          </ToastyProvider>
         </PageProvider>
       </CacheProvider>
     </PreferredThemeProvider>

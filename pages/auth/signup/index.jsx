@@ -1,11 +1,46 @@
-import { Formik } from "formik";
-import { Avatar, Box, Button, Container, FormControl, FormHelperText, Input, InputLabel, Paper, Stack, Typography } from '@mui/material'
+import { Formik } from "formik"
+import axios from 'axios'
+import { useRouter } from "next/router"
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  Paper,
+  Stack,
+  Typography,
+  CircularProgress,
+  Alert
+} from '@mui/material'
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import TemplateDefault from '../../../src/templates/Default'
 import { initialValues, validationSchema } from '../../../src/utility/form/valuesSignup'
+import useToasty from '../../../src/contexts/Toasty'
+
 
 const Signup = () => {
+  const router = useRouter()
+  const { setToasty } = useToasty()
+
+  const handleFormSubmit = async values => {
+    const response = await axios.post('/api/users', values)
+
+    if (response.data.success) {
+      console.log('Dados castrados com sucesso!')
+      setToasty({
+        open: true,
+        severity: "success",
+        text: "Cadastro realizado com sucesso!",
+      })
+      // redirecionar o usuário para pagina de login
+      router.push('/auth/signin')
+    }
+  }
 
   return (
     <TemplateDefault>
@@ -34,9 +69,7 @@ const Signup = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
-              console.log('ok, enviou o form', values)
-            }}
+            onSubmit={handleFormSubmit}
           >
             {
               ({
@@ -45,6 +78,7 @@ const Signup = () => {
                 errors,
                 handleChange,
                 handleSubmit,
+                isSubmitting,
               }) => {
                 return (
                   <form onSubmit={handleSubmit}>
@@ -113,15 +147,27 @@ const Signup = () => {
                         </FormHelperText>
                       </FormControl>
 
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        // disabled={isSubmitting}
-                        sx={{ textTransform: 'uppercase' }}
-                        fullWidth
-                      >
-                        Cadastrar
-                      </Button>
+                      {
+                        isSubmitting
+                          ? (
+                            <>
+                              <CircularProgress />
+                              <Typography component="h1" variant="body2">
+                                Cadastrando...
+                              </Typography>
+                            </>
+                          ) : (
+                            <Button
+                              type="submit"
+                              variant="contained"
+                              disabled={isSubmitting}
+                              sx={{ textTransform: 'uppercase' }}
+                              fullWidth
+                            >
+                              Cadastrar
+                            </Button>
+                          )
+                      }
 
                     </Stack>
                   </form>

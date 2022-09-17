@@ -4,14 +4,14 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '../src/utility/Link';
+import Link from '../../../src/utility/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 
-import Copyright from '../src/components/Copyright'
+import Copyright from '../../../src/components/Copyright'
 
 export default function SignInSide() {
 
