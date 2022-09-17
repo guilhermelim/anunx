@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 
 import TemplateDefault from '../../../src/templates/Default'
-import { initialValues, validationSchema } from './formValues'
+import { initialValues, validationSchema } from '../../../src/utility/form/valuesPublish'
 import FileUpload from '../../../src/components/FileUpload'
 
 
