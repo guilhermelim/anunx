@@ -6,6 +6,7 @@ import { CacheProvider } from '@emotion/react'
 import createEmotionCache from '../src/utility/createEmotionCache'
 import { ThemeProvider as PreferredThemeProvider } from 'next-themes'
 import { GlobalStyles } from '@mui/material'
+import { Provider } from "next-auth/client";
 
 import PageProvider from '../src/utility/PageProvider'
 import PageCheckMounted from '../src/utility/PageCheckMounted'
@@ -25,16 +26,18 @@ export default function MyApp(props) {
           <title>Anunx</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
-        <PageProvider>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <ToastyProvider>
-            <CssBaseline />
-            <GlobalStyles styles={globalStyles} />
-            <PageCheckMounted>
-              <Component {...pageProps} />
-            </PageCheckMounted>
-          </ToastyProvider>
-        </PageProvider>
+        <Provider session={pageProps.session}>
+          <PageProvider>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <ToastyProvider>
+              <CssBaseline />
+              <GlobalStyles styles={globalStyles} />
+              <PageCheckMounted>
+                <Component {...pageProps} />
+              </PageCheckMounted>
+            </ToastyProvider>
+          </PageProvider>
+        </Provider>
       </CacheProvider>
     </PreferredThemeProvider>
   );

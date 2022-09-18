@@ -1,6 +1,8 @@
 import { Formik } from "formik"
 import axios from 'axios'
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router'
+import { signIn, useSession } from 'next-auth/client'
+
 import {
   Avatar,
   Box,
@@ -16,7 +18,7 @@ import {
   CircularProgress,
   Alert
 } from '@mui/material'
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
 import TemplateDefault from '../../../src/templates/Default'
 import { initialValues, validationSchema } from '../../../src/utility/form/valuesSignin'
@@ -26,10 +28,17 @@ import useToasty from '../../../src/contexts/Toasty'
 const Signin = () => {
   const router = useRouter()
   const { setToasty } = useToasty()
+  const [session] = useSession();
 
-  const handleFormSubmit = async values => {
+  console.log(session);
 
-  }
+  const handleFormSubmit = (values) => {
+    signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      callbackUrl: "http://localhost:3000/user/dashboard",
+    });
+  };
 
   return (
     <TemplateDefault>
@@ -68,6 +77,15 @@ const Signin = () => {
               }) => {
                 return (
                   <form onSubmit={handleSubmit}>
+
+                    {
+                      router.query.i === "1" ? (
+                        <Alert variant="filled" severity="error" sx={{ my: 2 }}>
+                          Usuário ou senha inválidos
+                        </Alert>
+                      ) : null
+                    }
+
                     <Stack
                       sx={{ pt: 0 }}
                       direction="column"
