@@ -12,6 +12,8 @@ import PageProvider from '../src/utility/PageProvider'
 import PageCheckMounted from '../src/utility/PageCheckMounted'
 import { globalStyles } from '../src/theme'
 import { ToastyProvider } from '../src/contexts/Toasty'
+import CheckAuth from '../src/components/CheckAuth'
+
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -33,7 +35,13 @@ export default function MyApp(props) {
               <CssBaseline />
               <GlobalStyles styles={globalStyles} />
               <PageCheckMounted>
-                <Component {...pageProps} />
+                {
+                  Component.requireAuth ? (
+                    <CheckAuth Component={Component} pageProps={pageProps} />
+                  ) : (
+                    <Component {...pageProps} />
+                  )
+                }
               </PageCheckMounted>
             </ToastyProvider>
           </PageProvider>
