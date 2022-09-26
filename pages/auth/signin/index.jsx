@@ -29,20 +29,18 @@ import useToasty from '../../../src/contexts/Toasty'
 
 const Signin = () => {
   const router = useRouter()
-  const { setToasty } = useToasty()
-  const [session] = useSession();
 
   const handleFormSubmit = (values) => {
     signIn("credentials", {
       email: values.email,
       password: values.password,
-      callbackUrl: `${process.env.NEXTAUTH_URL}/user/dashboard`,
+      callbackUrl: `/user/dashboard`,
     });
   };
 
   const handleGoogleLogin = () => {
     signIn('google', {
-      callbackUrl: `${process.env.NEXTAUTH_URL}/user/dashboard`,
+      callbackUrl: `/user/dashboard`,
     })
   }
 
