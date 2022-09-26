@@ -24,7 +24,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 
 import TemplateDefault from '../../../src/templates/Default'
 import { initialValues, validationSchema } from '../../../src/utility/form/valuesSignin'
-import useToasty from '../../../src/contexts/Toasty'
 
 
 const Signin = () => {
