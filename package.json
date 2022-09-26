@@ -20,6 +20,7 @@
     "bcrypt": "^5.0.1",
     "formik": "^2.2.9",
     "mongoose": "^6.6.1",
+    "mongodb": "^3.7.3",
     "next": "12.2.5",
     "next-auth": "3.27.1",
     "next-connect": "^0.13.0",

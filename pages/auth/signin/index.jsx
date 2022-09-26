@@ -1,4 +1,5 @@
-import { Formik } from "formik"
+import Image from 'next/image'
+import { Formik } from 'formik'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/client'
@@ -19,6 +20,7 @@ import {
   Alert
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+// import GoogleIcon from '@mui/icons-material/Google'
 
 import TemplateDefault from '../../../src/templates/Default'
 import { initialValues, validationSchema } from '../../../src/utility/form/valuesSignin'
@@ -40,6 +42,12 @@ const Signin = () => {
     });
   };
 
+  const handleGoogleLogin = () => {
+    signIn('google', {
+      callbackUrl: 'http://localhost:3000/user/dashboard',
+    })
+  }
+
   return (
     <TemplateDefault>
 
@@ -56,9 +64,22 @@ const Signin = () => {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
+
             <Typography component="h1" variant="h5">
               Entrar na Conta
             </Typography>
+
+            <Button
+              onClick={handleGoogleLogin}
+              variant="contained"
+              sx={{ mt: 2 }}
+              startIcon={
+                // <GoogleIcon />
+                <Image src="/images/logo_google.svg" width={20} height={20} alt="Login com Google" />
+              }
+            >
+              Entrar com o Google
+            </Button>
           </Box>
 
           <Formik
