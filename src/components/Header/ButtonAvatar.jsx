@@ -1,6 +1,8 @@
 import React from 'react'
+import Link from '../../utility/Link'
 import { Box, Typography, Button, IconButton, Tooltip, Menu, Card, CardMedia, CardContent } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { useSession } from 'next-auth/client'
 
 import MenuAvatar from './MenuAvatar'
 import Avatar from '../Avatar'
@@ -16,6 +18,9 @@ const ButtonAvatar = () => {
     setAnchorUserMenu(null);
   }
 
+  const [session] = useSession()
+  // console.log(session.user.image);
+
   return (
     <Box sx={{ pl: 1, flexGrow: 0 }}>
 
@@ -27,38 +32,62 @@ const ButtonAvatar = () => {
         color="inherit" variant="text" onClick={handleOpenUserMenu}
       >
         <Tooltip title="Abrir Configurações">
-          <IconButton variant="text" sx={{ p: 0 }}>
-            {
-              true === true
-                ? <Avatar name="Guilherme Lima" image="https://avatars.githubusercontent.com/guilhermelim" />
-                : <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
-            }
-          </IconButton>
+          {
+            session
+              ? (
+                <IconButton variant="text" sx={{ p: 0 }}>
+                  <Avatar name={session.user.name} image={session.user.image} />
+                </IconButton>
+              )
+              : (
+                <IconButton variant="text" component={Link} href="/auth/signin" sx={{ p: 0, textDecoration: 'none' }}>
+                  <AccountCircleIcon fontSize="large" sx={{ color: 'white' }} />
+                </IconButton>
+              )
+          }
         </Tooltip>
-        <Typography variant="subtitle2" component="div" sx={{ ml: 1, flexGrow: 1, color: 'white', textTransform: 'uppercase' }}>
-          Guilherme Lima
-        </Typography>
+        {
+          session
+            ? (
+              <Typography variant="subtitle2" component="div" sx={{ ml: 1, flexGrow: 1, color: 'white', textTransform: 'uppercase' }}>
+                {session.user.name}
+              </Typography>
+            )
+            : (
+              // color='inherit'
+              <Typography variant="subtitle2" component={Link} href="/auth/signin" sx={{ ml: 1, flexGrow: 1, color: 'white', textTransform: 'uppercase', textDecoration: 'none' }}>
+                Login
+              </Typography>
+            )
+        }
+
       </Stack>
 
-      <Menu
-        sx={{ mt: '45px' }}
-        id="menu-appbar"
-        anchorEl={anchorUserMenu}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorUserMenu)}
-        onClose={handleCloseUserMenu}
-      >
-        <MenuAvatar closeMenu={handleCloseUserMenu} />
-      </Menu>
-    </Box>
+      {
+        session
+          ? (
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorUserMenu}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorUserMenu)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuAvatar closeMenu={handleCloseUserMenu} />
+            </Menu>
+          ) : null
+      }
+
+    </Box >
   )
 }
 

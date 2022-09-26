@@ -36,13 +36,13 @@ const Signin = () => {
     signIn("credentials", {
       email: values.email,
       password: values.password,
-      callbackUrl: "http://localhost:3000/user/dashboard",
+      callbackUrl: `${process.env.NEXTAUTH_URL}/user/dashboard`,
     });
   };
 
   const handleGoogleLogin = () => {
     signIn('google', {
-      callbackUrl: 'http://localhost:3000/user/dashboard',
+      callbackUrl: `${process.env.NEXTAUTH_URL}/user/dashboard`,
     })
   }
 

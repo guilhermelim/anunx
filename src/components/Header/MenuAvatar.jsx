@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
 import Link from '../../utility/Link'
-import { Button, Divider, MenuItem, Typography } from '@mui/material'
+import { signOut, useSession } from 'next-auth/client'
+import { Divider, MenuItem, Typography } from '@mui/material'
 
 import ToggleButtonGroupColorMode from '../theme/ToggleButtonGroupColorMode';
 const MenuAvatar = ({ closeMenu }) => {
+
+
   return (
     <>
       <MenuItem onClick={closeMenu} component={Link} noLinkStyle href="/user/dashboard">
@@ -22,7 +24,12 @@ const MenuAvatar = ({ closeMenu }) => {
 
       <Divider />
 
-      <MenuItem onClick={closeMenu}>
+      <MenuItem onClick={() => {
+        closeMenu()
+        signOut({
+          callbackUrl: '/'
+        })
+      }}>
         <Typography textAlign="center">Sair</Typography>
       </MenuItem>
     </>

@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from '../../utility/Link'
 import { Box, Container, AppBar, Toolbar, Typography, Button } from '@mui/material'
+import { useSession } from 'next-auth/client'
 
 import ButtonAvatar from './ButtonAvatar'
 
 const Header = () => {
+  const [session] = useSession()
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -17,13 +19,12 @@ const Header = () => {
               </Typography>
             </Box>
 
-
             <Button
               color="inherit"
               variant="outlined"
               component={Link}
               noLinkStyle
-              href="/user/publish"
+              href={session ? '/user/publish' : '/auth/signin'}
               sx={{ display: { xs: 'none', sm: 'flex' } }}
             >
               Anunciar e Vender

@@ -14,7 +14,7 @@ export default NextAuth({
       name: "Credentials",
       async authorize(credentials) {
         const res = await axios.post(
-          "http://localhost:3000/api/auth/signin",
+          `${process.env.NEXTAUTH_URL}/api/auth/signin`,
           credentials
         );
 
