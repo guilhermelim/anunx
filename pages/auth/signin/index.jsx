@@ -32,8 +32,6 @@ const Signin = () => {
   const { setToasty } = useToasty()
   const [session] = useSession();
 
-  console.log(session);
-
   const handleFormSubmit = (values) => {
     signIn("credentials", {
       email: values.email,
