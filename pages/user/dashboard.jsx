@@ -7,6 +7,7 @@ import dbConnect from '../../src/utility/dbConnect';
 import ProductsModel from '../../src/models/Products';
 import TemplateDefault from '../../src/templates/Default';
 import Card from '../../src/components/Card';
+import { formatCurrency } from '../../src/utility/currency';
 
 const Dashboard = ({ products }) => {
   console.log(products);
@@ -58,7 +59,7 @@ const Dashboard = ({ products }) => {
               <Grid item key={product._id} xs={12} sm={6} md={4}>
                 <Card
                   title={product.title}
-                  subtitle={`R$ ${product.price},00`}
+                  subtitle={formatCurrency(product.price)}
                   image={`/uploads/${product.files[0].name}`}
                   actions={
                     <>
