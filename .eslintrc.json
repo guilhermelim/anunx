@@ -34,6 +34,7 @@
     "no-restricted-syntax": "off",
     "react/function-component-definition": "off",
     "no-param-reassign": "off",
-    "no-throw-literal": "off"
+    "no-throw-literal": "off",
+    "no-underscore-dangle": "off"
   }
 }

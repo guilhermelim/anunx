@@ -1,7 +1,7 @@
 import { rename } from 'fs';
 import path from 'path';
 import formidable from 'formidable-serverless';
-import ProductsModel from '../../models/products';
+import ProductsModel from '../../models/Products';
 import dbConnect from '../../utility/dbConnect';
 
 const post = async (req, res) => {

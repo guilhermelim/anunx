@@ -1,13 +1,12 @@
-import UsersModel from '../../models/users'
-import dbConnect from '../../utility/dbConnect'
-import { crypto } from '../../utility/password'
-
+import UsersModel from '../../models/Users';
+import dbConnect from '../../utility/dbConnect';
+import { crypto } from '../../utility/password';
 
 const get = async (req, res) => {
-  await dbConnect()
-  const users = await UsersModel.find()
-  res.status(200).json({ success: true, users })
-}
+  await dbConnect();
+  const users = await UsersModel.find();
+  res.status(200).json({ success: true, users });
+};
 
 const post = async (req, res) => {
   // pegar os dados que vem no req
@@ -15,28 +14,21 @@ const post = async (req, res) => {
   // criptografar a senha
   // salvar os dados
   // responder sucesso
-  const {
-    name,
-    email,
-    password,
-  } = req.body
+  const { name, email, password } = req.body;
 
-  await dbConnect()
+  await dbConnect();
 
-  const passwordCrypto = await crypto(password)
+  const passwordCrypto = await crypto(password);
 
   const user = new UsersModel({
     name,
     email,
     password: passwordCrypto,
-  })
+  });
 
-  user.save()
+  user.save();
 
-  res.status(201).json({ success: true })
-}
+  res.status(201).json({ success: true });
+};
 
-export {
-  get,
-  post,
-}
+export { get, post };
