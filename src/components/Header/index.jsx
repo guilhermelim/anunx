@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '../../utility/Link'
-import { Box, Container, AppBar, Toolbar, Typography, Button } from '@mui/material'
 import { useSession } from 'next-auth/client'
+import { Box, Container, AppBar, Toolbar, Typography, Button } from '@mui/material'
 
 import ButtonAvatar from './ButtonAvatar'
 

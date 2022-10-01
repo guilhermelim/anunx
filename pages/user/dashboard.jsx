@@ -1,3 +1,4 @@
+import Link from '../../src/utility/Link'
 import { Container, Box, Stack, Typography, Button } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2' // Grid version 2
 
@@ -30,7 +31,13 @@ const Dashboard = () => {
             spacing={2}
             justifyContent="center"
           >
-            <Button variant="contained" sx={{ textTransform: 'uppercase' }}>Publicar novo anúncio</Button>
+            <Button
+              variant="contained"
+              sx={{ textTransform: 'uppercase' }}
+              component={Link}
+              noLinkStyle
+              href="/user/publish"
+            >Publicar novo anúncio</Button>
           </Stack>
         </Container>
       </Box>
