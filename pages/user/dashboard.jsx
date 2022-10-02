@@ -1,16 +1,110 @@
-import { Container, Box, Stack, Typography, Button } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+import React, { useState } from 'react';
+import {
+  Grid,
+  Container,
+  Box,
+  Stack,
+  Typography,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import { getSession } from 'next-auth/client';
+import axios from 'axios';
 import Link from '../../src/utility/Link';
-
 import dbConnect from '../../src/utility/dbConnect';
 import ProductsModel from '../../src/models/Products';
 import TemplateDefault from '../../src/templates/Default';
 import Card from '../../src/components/Card';
 import { formatCurrency } from '../../src/utility/currency';
+import useToasty from '../../src/contexts/Toasty';
+
+const AlertDialog = ({
+  open,
+  close,
+  product,
+  setRemovedProducts,
+  removedProducts,
+}) => {
+  const { setToasty } = useToasty();
+
+  const handleSuccess = () => {
+    close();
+    setRemovedProducts([...removedProducts, product._id]);
+    setToasty({
+      open: true,
+      severity: 'success',
+      text: 'Produto removido com sucesso!',
+    });
+  };
+
+  const handleError = () => {
+    close();
+    setToasty({
+      open: true,
+      severity: 'error',
+      text: 'Ops, ocorreu um erro!',
+    });
+  };
+
+  const handleConfirmRemove = () => {
+    console.log(`removido o anuncio ${product.title} ${product._id}`);
+
+    axios
+      .delete('/api/products/delete', {
+        data: {
+          id: product._id,
+        },
+      })
+      .then(handleSuccess)
+      .catch(handleError);
+  };
+
+  return (
+    <Dialog
+      open={open}
+      onClose={close}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">
+        Você tem certeza que deseja remover esse anúncio?
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          Ao clicar em <strong>ACEITO</strong> o seu anúncio{' '}
+          <strong>{product.title}</strong> será permanentemente removido e não
+          poderá ser recuperado. Você tem certeza que deseja realizar essa ação?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={close}>Discordo</Button>
+        <Button onClick={handleConfirmRemove} autoFocus>
+          Aceito
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 const Dashboard = ({ products }) => {
-  console.log(products);
+  const [removedProducts, setRemovedProducts] = useState([]);
+  const [productState, setProductState] = useState();
+  const [openRemove, setOpenRemove] = useState(false);
+
+  const handleClickOpenRemove = (product) => {
+    setProductState(product);
+    setOpenRemove(true);
+  };
+
+  const handleCloseRemove = () => {
+    setOpenRemove(false);
+  };
+
+  // console.log(products);
 
   return (
     <TemplateDefault TemplateDefault>
@@ -55,21 +149,38 @@ const Dashboard = ({ products }) => {
       <Container sx={{ pt: 5 }} maxWidth="md">
         <Grid container spacing={4}>
           {products.length !== 0 ? (
-            products.map((product) => (
-              <Grid item key={product._id} xs={12} sm={6} md={4}>
-                <Card
-                  title={product.title}
-                  subtitle={formatCurrency(product.price)}
-                  image={`/uploads/${product.files[0].name}`}
-                  actions={
-                    <>
-                      <Button size="small">Editar</Button>
-                      <Button size="small">Remover</Button>
-                    </>
-                  }
-                />
-              </Grid>
-            ))
+            products.map((product) => {
+              if (removedProducts.includes(product._id)) return null;
+              return (
+                <Grid item key={product._id} xs={12} sm={6} md={4}>
+                  <Card
+                    title={product.title}
+                    subtitle={formatCurrency(product.price)}
+                    image={`/uploads/${product.files[0].name}`}
+                    actions={
+                      <>
+                        <Button size="small">Editar</Button>
+                        <Button
+                          size="small"
+                          onClick={() => {
+                            handleClickOpenRemove(product);
+                          }}
+                        >
+                          Remover
+                        </Button>
+                        <AlertDialog
+                          open={openRemove}
+                          close={handleCloseRemove}
+                          product={productState}
+                          removedProducts={removedProducts}
+                          setRemovedProducts={setRemovedProducts}
+                        />
+                      </>
+                    }
+                  />
+                </Grid>
+              );
+            })
           ) : (
             <Grid item xs={12}>
               <Typography
