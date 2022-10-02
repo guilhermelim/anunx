@@ -75,9 +75,9 @@ const AlertDialog = ({
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Ao clicar em <strong>ACEITO</strong> o seu anúncio{' '}
-          <strong>{product.title}</strong> será permanentemente removido e não
-          poderá ser recuperado. Você tem certeza que deseja realizar essa ação?
+          Ao clicar em <strong>ACEITO</strong> o seu anúncio será
+          permanentemente removido e não poderá ser recuperado. Você tem certeza
+          que deseja realizar essa ação?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
