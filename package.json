@@ -30,6 +30,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",
     "react-material-ui-carousel": "^2.3.10-mui5",
+    "slugify": "^1.6.5",
     "use-sound": "^4.0.1",
     "yup": "^0.32.11"
   },
