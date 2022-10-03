@@ -1,14 +1,15 @@
-import { useContext, createContext, useState } from "react"
-import Toasty from "../components/Toasty"
+/* eslint-disable react/jsx-no-constructed-context-values */
+import { useContext, createContext, useState } from 'react';
+import Toasty from '../components/Toasty';
 
-const ToastyContext = createContext({})
+const ToastyContext = createContext({});
 
 export const ToastyProvider = ({ children }) => {
   const [toasty, setToasty] = useState({
     open: false,
-    text: "",
-    severity: "info",
-  })
+    text: '',
+    severity: 'info',
+  });
 
   return (
     <ToastyContext.Provider value={{ setToasty }}>
@@ -25,8 +26,8 @@ export const ToastyProvider = ({ children }) => {
       />
       {children}
     </ToastyContext.Provider>
-  )
-}
-const useToasty = () => useContext(ToastyContext)
+  );
+};
+const useToasty = () => useContext(ToastyContext);
 
-export default useToasty
+export default useToasty;

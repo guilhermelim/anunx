@@ -1,22 +1,20 @@
-import * as yup from 'yup'
-
+import * as yup from 'yup';
 
 const initialValues = {
   email: '',
   password: '',
-}
+};
 
 const validationSchema = yup.object().shape({
-  email: yup.string()
+  email: yup
+    .string()
     .email('Digite um e-mail válido')
     .required('Campo obrigatório'),
 
-  password: yup.string()
+  password: yup
+    .string()
     .min(6, 'Escreva uma senha de no mínimo 6 caracteres.')
     .required('Campo obrigatório'),
-})
+});
 
-export {
-  initialValues,
-  validationSchema
-}
+export { initialValues, validationSchema };

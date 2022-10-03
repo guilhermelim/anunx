@@ -1,20 +1,33 @@
-import React from 'react'
-import Link from '../../utility/Link'
-import { useSession } from 'next-auth/client'
-import { Box, Container, AppBar, Toolbar, Typography, Button } from '@mui/material'
+import React from 'react';
+import { useSession } from 'next-auth/client';
+import {
+  Box,
+  Container,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+} from '@mui/material';
+import Link from '../../utility/Link';
 
-import ButtonAvatar from './ButtonAvatar'
+import ButtonAvatar from './ButtonAvatar';
 
 const Header = () => {
-  const [session] = useSession()
+  const [session] = useSession();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" elevation={3}>
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <Toolbar>
-            <Box sx={{ flexGrow: 1 }} >
-              <Typography variant="h6" color='inherit' component={Link} href="/" sx={{ textDecoration: 'none' }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                color="inherit"
+                component={Link}
+                href="/"
+                sx={{ textDecoration: 'none' }}
+              >
                 Anunx
               </Typography>
             </Box>
@@ -31,12 +44,11 @@ const Header = () => {
             </Button>
 
             <ButtonAvatar />
-
           </Toolbar>
         </Container>
       </AppBar>
-    </Box >
-  )
-}
+    </Box>
+  );
+};
 
-export default Header
+export default Header;

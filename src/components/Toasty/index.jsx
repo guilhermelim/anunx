@@ -1,9 +1,8 @@
-import { Alert, Snackbar } from '@mui/material'
-
+import { Alert, Snackbar } from '@mui/material';
 
 const Toasty = ({ open, text, severity, onClose = null }) => {
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     if (onClose) onClose();
@@ -12,8 +11,8 @@ const Toasty = ({ open, text, severity, onClose = null }) => {
   return (
     <Snackbar
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: 'bottom',
+        horizontal: 'right',
       }}
       open={open}
       autoHideDuration={6000}
