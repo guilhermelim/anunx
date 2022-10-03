@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -15,9 +14,7 @@ export default function About() {
         <Button variant="contained" component={Link} noLinkStyle href="/">
           Go to the main page
         </Button>
-        <Link href="/about">
-          Go to the about page
-        </Link>
+        <Link href="/about">Go to the about page</Link>
       </Box>
     </Container>
   );
