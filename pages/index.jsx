@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Container,
   Grid,
@@ -8,6 +9,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import slugify from 'slugify';
+import { useRouter } from 'next/router';
 import TemplateDefault from '../src/templates/Default';
 import Card from '../src/components/Card';
 import dbConnect from '../src/utility/dbConnect';
@@ -15,81 +17,94 @@ import ProductsModel from '../src/models/Products';
 import { formatCurrency } from '../src/utility/currency';
 import Link from '../src/utility/Link';
 
-const Home = ({ products }) => (
-  <TemplateDefault>
-    <Container maxWidth="sm">
-      <Typography
-        component="h1"
-        variant="h3"
-        align="center"
-        color="text.primary"
-        gutterBottom
-      >
-        O que deseja encontrar?
-      </Typography>
+const Home = ({ products }) => {
+  const router = useRouter();
+  const [searchInput, setsearchInput] = useState();
 
-      <Paper
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          px: 2,
-          py: 0.2,
-        }}
-      >
-        <InputBase placeholder="Ex.: iPhone 12 com garantia" fullWidth />
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-    </Container>
+  const handleSubmitSearch = () => {
+    // redirecionar o usuário para pagina de login
+    router.push(`/search/${searchInput}`);
+  };
+  return (
+    <TemplateDefault>
+      <Container maxWidth="sm">
+        <Typography
+          component="h1"
+          variant="h3"
+          align="center"
+          color="text.primary"
+          gutterBottom
+        >
+          O que deseja encontrar?
+        </Typography>
 
-    <Container sx={{ pt: 5 }} maxWidth="lg">
-      <Typography
-        component="h2"
-        variant="h4"
-        align="center"
-        color="text.primary"
-        gutterBottom
-      >
-        Destaques
-      </Typography>
+        <Paper
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            px: 2,
+            py: 0.2,
+          }}
+        >
+          <InputBase
+            onChange={(e) => setsearchInput(e.target.value)}
+            placeholder="Ex.: iPhone 12 com garantia"
+            fullWidth
+          />
+          <IconButton onClick={handleSubmitSearch}>
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </Container>
 
-      <Grid container spacing={4}>
-        {products.length !== 0 ? (
-          products.map((product) => {
-            const category = slugify(product.category).toLocaleLowerCase();
-            const title = slugify(product.title).toLocaleLowerCase();
-            return (
-              <Grid item key={product._id} xs={12} sm={6} md={4}>
-                <Link
-                  sx={{ textDecoration: 'none' }}
-                  href={`/${category}/${title}/${product._id}`}
-                >
-                  <Card
-                    title={product.title}
-                    subtitle={formatCurrency(product.price)}
-                    image={`/uploads/${product.files[0].name}`}
-                  />
-                </Link>
-              </Grid>
-            );
-          })
-        ) : (
-          <Grid item xs={12}>
-            <Typography
-              variant="h7"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              Ainda não possui nenhum anúncio cadastrado.
-            </Typography>
-          </Grid>
-        )}
-      </Grid>
-    </Container>
-  </TemplateDefault>
-);
+      <Container sx={{ pt: 5 }} maxWidth="lg">
+        <Typography
+          component="h2"
+          variant="h4"
+          align="center"
+          color="text.primary"
+          gutterBottom
+        >
+          Destaques
+        </Typography>
+
+        <Grid container spacing={4}>
+          {products.length !== 0 ? (
+            products.map((product) => {
+              const category = slugify(product.category).toLocaleLowerCase();
+              const title = slugify(product.title).toLocaleLowerCase();
+              return (
+                <Grid item key={product._id} xs={12} sm={6} md={4}>
+                  <Link
+                    sx={{ textDecoration: 'none' }}
+                    href={`/${category}/${title}/${product._id}`}
+                  >
+                    <Card
+                      title={product.title}
+                      subtitle={formatCurrency(product.price)}
+                      image={`/uploads/${product.files[0].name}`}
+                    />
+                  </Link>
+                </Grid>
+              );
+            })
+          ) : (
+            <Grid item xs={12}>
+              <Typography
+                variant="h7"
+                align="center"
+                color="text.secondary"
+                paragraph
+              >
+                Ainda não possui nenhum anúncio cadastrado.
+              </Typography>
+            </Grid>
+          )}
+        </Grid>
+      </Container>
+    </TemplateDefault>
+  );
+};
 
 export async function getServerSideProps() {
   await dbConnect();
