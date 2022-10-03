@@ -1,32 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import Link from '../../utility/Link'
-import { Button, Divider, MenuItem, Typography } from '@mui/material'
+import { signOut } from 'next-auth/client';
+import { Divider, MenuItem, Typography } from '@mui/material';
+import Link from '../../utility/Link';
 
 import ToggleButtonGroupColorMode from '../theme/ToggleButtonGroupColorMode';
-const MenuAvatar = ({ closeMenu }) => {
-  return (
-    <>
-      <MenuItem onClick={closeMenu} component={Link} noLinkStyle href="/user/dashboard">
-        <Typography textAlign="center">Meus anúncios</Typography>
-      </MenuItem>
 
-      <MenuItem onClick={closeMenu} component={Link} noLinkStyle href="/user/publish">
-        <Typography textAlign="center">Publicar novo anúncio</Typography>
-      </MenuItem>
+const MenuAvatar = ({ closeMenu }) => (
+  <>
+    <MenuItem
+      onClick={closeMenu}
+      component={Link}
+      noLinkStyle
+      href="/user/dashboard"
+    >
+      <Typography textAlign="center">Meus anúncios</Typography>
+    </MenuItem>
 
-      <Divider />
+    <MenuItem
+      onClick={closeMenu}
+      component={Link}
+      noLinkStyle
+      href="/user/publish"
+    >
+      <Typography textAlign="center">Publicar novo anúncio</Typography>
+    </MenuItem>
 
-      <MenuItem onClick={closeMenu}>
-        <ToggleButtonGroupColorMode />
-      </MenuItem>
+    <Divider />
 
-      <Divider />
+    <MenuItem onClick={closeMenu}>
+      <ToggleButtonGroupColorMode />
+    </MenuItem>
 
-      <MenuItem onClick={closeMenu}>
-        <Typography textAlign="center">Sair</Typography>
-      </MenuItem>
-    </>
-  )
-}
+    <Divider />
 
-export default MenuAvatar
+    <MenuItem
+      onClick={() => {
+        closeMenu();
+        signOut({
+          callbackUrl: '/',
+        });
+      }}
+    >
+      <Typography textAlign="center">Sair</Typography>
+    </MenuItem>
+  </>
+);
+
+export default MenuAvatar;

@@ -1,6 +1,5 @@
-import { css } from '@emotion/react'
-import { createTheme } from '@mui/material/styles'
-
+import { css } from '@emotion/react';
+import { createTheme } from '@mui/material/styles';
 
 export const lightTheme = createTheme({
   palette: {
@@ -16,7 +15,7 @@ export const lightTheme = createTheme({
       paper: '#fff',
     },
   },
-})
+});
 
 export const darkTheme = createTheme({
   palette: {
@@ -32,20 +31,20 @@ export const darkTheme = createTheme({
       paper: '#424242',
     },
   },
-})
+});
 
-const transitionEffect = `color 350ms ease 0s, background 1000ms ease 0s`
+const transitionEffect = `color 350ms ease 0s, background 1000ms ease 0s`;
 export const globalStyles = css`
-html,
-body {
-  color: ${lightTheme.palette.text.primary};
-  background: ${lightTheme.palette.background.default};
-  transition: ${transitionEffect};
-}
+  html,
+  body {
+    color: ${lightTheme.palette.text.primary};
+    background: ${lightTheme.palette.background.default};
+    transition: ${transitionEffect};
+  }
 
-[data-theme='dark'],
-[data-theme='dark'] body {
-  color: ${darkTheme.palette.text.primary};
-  background: ${darkTheme.palette.background.default};  
-}
-`
+  [data-theme='dark'],
+  [data-theme='dark'] body {
+    color: ${darkTheme.palette.text.primary};
+    background: ${darkTheme.palette.background.default};
+  }
+`;
